@@ -14,11 +14,6 @@ class Teamleden
     ObjectSpace.each_object(Team) do |teamObj|
       @team = teamObj
     end
-
-    @team = nil
-    ObjectSpace.each_object(Team) do |teamObj|
-      @team = teamObj
-    end
     @mysql = nil
     ObjectSpace.each_object(Mysql) { |o|
 	 @mysql = o
