@@ -8,6 +8,14 @@ The first 2 versions have been written from scratch in PHP
 
 Requirements
 ------------
-Ruby
-cinch (IRC bot framework)
-mysql-ruby
+######RubyGems
+
+######cinch (IRC bot framework)
+	gem install cinch
+######mysql-ruby
+	gem install mysql
+
+Author
+------
+
+* [Werring](mailto:werring(at)treefamily(dot)com)
