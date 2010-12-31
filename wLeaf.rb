@@ -9,6 +9,7 @@ require './plugin_autovoice.rb'
 require './plugin_test.rb'
 require './plugin_joinpart.rb'
 require './plugin_team.rb'
+require './plugin_commands.rb'
 
 require "./team.rb"
 @team = Team.new
@@ -31,7 +32,8 @@ bot = Cinch::Bot.new do
 	Autovoice,
 	Test,
 	JoinPart,
-	Teamleden
+	Teamleden,
+	Commands
 	]
   end
 end
