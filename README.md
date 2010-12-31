@@ -18,4 +18,4 @@ Requirements
 Author
 ------
 
-* [Werring](mailto:werring(at)treefamily(dot)com)
+* [Werring](mailto:werring<at>treefamily<dot>com)
