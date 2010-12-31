@@ -114,7 +114,8 @@ class Teamleden
 	   m.user.send "Couldn't suspend #{nick}, Error: #{addedToDb['errormsg']}"
 	 else
 	   m.user.send "Suspended #{nick} (#{suspended.authname})"
-	   @bot.raw "CS suspend *#{suspended.authname}"
+	   @bot.raw "CS #tree suspend *#{suspended.authname}"
+	   @team.createTeam
 	 end
     else
 	 m.user.send "No such nick #{nick}... try again please"
@@ -142,7 +143,8 @@ class Teamleden
 	   m.user.send "Couldn't unsuspend #{nick}, Error: #{addedToDb['errormsg']}"
 	 else
 	   m.user.send "Unsuspended #{nick} (#{suspended.authname})"
-	   @bot.raw "CS unsuspend *#{suspended.authname}"
+	   @bot.raw "CS #tree unsuspend *#{suspended.authname}"
+	   @team.createTeam
 	 end
     else
 	 m.user.send "No such nick #{nick}... try again please"
