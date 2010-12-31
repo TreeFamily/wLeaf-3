@@ -1,6 +1,6 @@
 class Test
   include Cinch::Plugin
-  prefix "<"
+  prefix ">"
   match /mysqlTest/, method: :mysqlTest
   match /mysqlqry(?: (.+))?/, method: :mysqlQry
   def initialize(*args)

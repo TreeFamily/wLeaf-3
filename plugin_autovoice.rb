@@ -2,7 +2,7 @@ class Autovoice
   include Cinch::Plugin
   
   listen_to :join
-  prefix "<"
+  prefix ">"
   match /autovoice (on|off)/ , method: :setOpt
   match /autovoice$/ , method: :getOpt
   def initialize(*args)

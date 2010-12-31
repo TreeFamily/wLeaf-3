@@ -1,6 +1,6 @@
 class Teamleden
   include Cinch::Plugin
-  prefix "<"
+  prefix ">"
   match /myaccess/i , method: :myaccess
   match /access (.+)/i , method: :access
   match /addhelper (.+)/i , method: :addHelper

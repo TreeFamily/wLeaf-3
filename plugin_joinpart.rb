@@ -1,6 +1,6 @@
 class JoinPart
   include Cinch::Plugin
-  prefix "<"
+  prefix ">"
   match /join (.+)/, method: :join
   match /part(?: (.+))?/, method: :part
   match /quit(?: (.+))?/, method: :quit
