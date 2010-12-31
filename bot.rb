@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby
 require 'cinch'
-require 'Mysql'
+require 'mysql'
 sql = Mysql::new("localhost","werring","TWWT","rubyTest")
 
 
