@@ -7,14 +7,14 @@ class JoinPart
   
   def initialize(*args)
     super
-    team = nil
+    @team = nil
     ObjectSpace.each_object(Team) do |teamObj|
-      team = teamObj
+      @team = teamObj
     end
   end
   
   def join(m, channel)
-    return unless helper(m.user)
+    return unless @team.helper(m.user)
     Channel(channel).join
   end
 
