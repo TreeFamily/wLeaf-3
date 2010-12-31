@@ -1,4 +1,4 @@
-#!/usr/local/Cellar/ruby/1.9.2-p0/bin/ruby
+#!/usr/local/bin/ruby
 require 'cinch'
 require 'Mysql'
 sql = Mysql::new("localhost","werring","TWWT","rubyTest")
