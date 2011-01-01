@@ -34,7 +34,7 @@ class Test
 	 @mysql = o
     }
     end
-    qry ||= "SELECT * FROM `rubyTest`.`test`"
+    qry ||= "SELECT * FROM `rubyTest`.`team`"
     result = @mysql::query(qry)
     result.each_hash do |ret|
 	text = "" 
