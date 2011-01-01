@@ -10,6 +10,7 @@ require './plugin_test.rb'
 require './plugin_joinpart.rb'
 require './plugin_team.rb'
 require './plugin_commands.rb'
+require './plugin_znc.rb'
 
 require "./team.rb"
 @team = Team.new
@@ -33,7 +34,8 @@ bot = Cinch::Bot.new do
 	Test,
 	JoinPart,
 	Teamleden,
-	Commands
+	Commands,
+	Znc
 	]
   end
 end
