@@ -16,9 +16,11 @@ class Znc
     }
   end
   
-  def addUser(m,*args)
+  def addUser(m,params)
     return unless @team.helper(m.user)
-    if args.pop() == "$staff"
+    args = params.split(" ")
+    if args.last == "$staff"
+	 args.pop()
 	 staff = true
     else
 	 staff = false
@@ -59,6 +61,12 @@ class Znc
     if staffserver && (teamler || @team.admin(requester))
 	 target = "=admin"
 	 server = "staff.znc.treefamily.nl 9999"
+	 allow = true
+    elsif staffserver
+	 requester.send "Sorry, but you cant make an account on the staffserver for this users, ask an admin for help"
+	 return
+    else
+	 allow = !checkZncExists(account,auth)
     end
     @bot.send(target,"CloneUser clone #{account}")
     @bot.send(target,"set password #{account} #{pass}")
@@ -85,6 +93,17 @@ class Znc
 	 f = !f
     end
     r
+  end
+  
+  def checkZncExists(accountname,authname)
+    r = false
+    
+    begin
+	 
+    end
+    
+    
+    return r
   end
 
 end
