@@ -1,7 +1,7 @@
 class Commands
   include Cinch::Plugin
   prefix ">"
-  match /(.+)(.)*/i , method: :command
+  match /(.+)(?: (.+))?/i , method: :command
   #*/
   def initialize(*args)
     super
@@ -14,11 +14,13 @@ class Commands
     }
     @commands = ["autovoice",
 			  "join","part","quit",
-			  "myaccess","access", "addhelper","addadmin","suspend","unsuspend"
+			  "myaccess","access", "addhelper","addadmin","suspend","unsuspend",
+			  "adduser"
 			  ]
   end
   
-  def command(m,*args)
+  def command(m,command)
+    args = command.split(" ")
     return if @commands.include?(args[0]) || @team.helper(m.user)!=true
     m.user.send "command #{args[0]} is not known"
   end
