@@ -1,3 +1,5 @@
 *.komodoproject
 test.*
+nohup.out
+wLeaf.log
 
