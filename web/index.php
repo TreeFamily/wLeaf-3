@@ -1,10 +1,38 @@
 <?php 
 session_start();
 header("Content-Type: text/html; charset=UTF-8");
+$noPass = false;
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	if((isset($_POST['auth'])) || $_SESSION["loggedIn"]){
+		$sha1Pass = sha1($_POST['pass']);
+		$sql = mysql_connect("localhost","werring","TWWT") or die("could not connect: " . mysql_error() . PHP_EOL);
+		$qry =
+		<<<SQL
+SELECT COUNT(*) FROM `rubyTest`.`team` WHERE `auth`='$_POST[auth]' AND `passwd`='$sha1Pass'
+SQL;
+		$res = mysql_query($qry,$sql) or die("could not exec query: " . mysql_error() . PHP_EOL);
+		$returnVal = mysql_fetch_assoc($res);
+		$_SESSION["loggedIn"] = ($returnVal["COUNT(*)"] > 0);
+		if (!$_SESSION["loggedIn"]) {
+			
+			$qry = <<<SQL
+SELECT COUNT(*) FROM `rubyTest`.`team` WHERE `auth`='$_POST[auth]' AND `passwd` IS NULL
+SQL;
+			$res = mysql_query($qry,$sql) or die("could not exec query: " . mysql_error() . PHP_EOL);
+			$returnVal = mysql_fetch_assoc($res);
+			$noPass = ($returnVal["COUNT(*)"]>0);
+		}
+	}
+}
+
+
+
+
 
 $_SESSION['lineCount'] = 9;
-$JS = "<script src='jquery.js' ></script>".PHP_EOL;
-$JS.= "<script src='ajax.php?js' ></script>".PHP_EOL;
+$JS = "<script src='jquery.js'></script>".PHP_EOL;
+$JS.= "<script src='ajax.php?js'></script>".PHP_EOL;
 
 $CSS = <<<STYLE
 <style>
@@ -57,14 +85,13 @@ if($_SESSION['loggedIn']){
 		</div>
 	</body>
 </html>";
-} else {
+} elseif(!$noPass) {
 	echo <<<HTML
 <html>
 	<head>
 		<title>wLeaf - Log</title>
-HTML
-		.$JS.PHP_EOL.$CSS.
-<<<HTML
+		$JS
+		$CSS
 	</head>
 	<body>
 		<fieldset>
@@ -82,7 +109,25 @@ HTML
 		</fieldset>
 	</body>
 </html>
-HTML
+HTML;
 
+} else {
+	echo <<<HTML
+	<html>
+	<head>
+		<title>wLeaf - Log</title>
+		$JS
+		$CSS
+	</head>
+	<body>
+		<fieldset>
+			<legend>Login</legend>
+			Sorry you haven't setted your web password,<br /> 
+			please set your password on IRC by using the createwebpass command.
+		</fieldset>
+	</body>
+</html>
+HTML;
 }
- ?>
+
+?>
