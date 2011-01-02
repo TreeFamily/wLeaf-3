@@ -3,7 +3,7 @@ require 'digest/sha1'
 class WebIface
   include Cinch::Plugin
   prefix ">"
-  match /createwebpass/i , method: :createPass
+  match /createwebpass(?: (.+))?/i , method: :createPass
   
   def initialize(*args)
     super
@@ -20,7 +20,8 @@ class WebIface
     return unless @team.helper(m.user)
     passwd ||= password 8
     sha1Pass = Digest::SHA1.hexdigest(passwd)
-    m.user.send "You can now login with #{m.user.auth} #{passwd}"
+    @mysql.query("UPDATE `rubyTest`.`team` SET `passwd` = '#{sha1Pass}' WHERE `auth`='#{m.user.authname}';")
+    m.user.send "You can now login with #{m.user.authname} #{passwd}"
     
   end
   
