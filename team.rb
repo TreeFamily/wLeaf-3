@@ -3,6 +3,7 @@ class Team
     @admins = []
     @helpers = []
     @tijd = Time.now.to_i
+    @userTime = {}
   end
   
   def addHelper(auth)
@@ -46,15 +47,27 @@ class Team
   
   #checking admin levels
   def helper(user)
-    user.refresh
+    @userTime[user.authname] ||=1
+    if @userTime[user.authname] < (Time.now.to_i-10)
+	     user.refresh
+	   @userTime[user.authname] = Time.now.to_i
+    end
     @admins.include?(user.authname) || @helpers.include?(user.authname)
   end
   def admin(user)
-    user.refresh
+    @userTime[user.authname] ||=1
+    if @userTime[user.authname] < (Time.now.to_i-10)
+	     user.refresh
+	   @userTime[user.authname] = Time.now.to_i
+    end
     @admins.include?(user.authname)
   end
   def suspended(user)
-    user.refresh
+    @userTime[user.authname] ||=1
+    if @userTime[user.authname] < (Time.now.to_i-10)
+	     user.refresh
+	   @userTime[user.authname] = Time.now.to_i
+    end
     suspended = getSuspended
     suspended.include?(user.authname)
   end
