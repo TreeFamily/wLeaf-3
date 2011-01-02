@@ -3,8 +3,8 @@ session_start();
 header("Content-Type: text/html; charset=UTF-8");
 
 $_SESSION['lineCount'] = 9;
-$scripts = "<script src='jquery.js' ></script>".PHP_EOL;
-$scripts.= "<script src='ajax.php?js' ></script>".PHP_EOL;
+$JS = "<script src='jquery.js' ></script>".PHP_EOL;
+$JS.= "<script src='ajax.php?js' ></script>".PHP_EOL;
 
 $CSS = <<<STYLE
 <style>
@@ -38,18 +38,51 @@ for($i=$oldCount;$i<=$_SESSION['lineCount'];$i++){
 
 
 
-
-echo "<html>
-<head>
-<title>wLeaf - Log</title>
-".$scripts."
-".$CSS."
-</head>
-<body>
-wLeaf Logs:<br/>
-<div id='log'><pre>".$log."</pre></div>
-<div><div id='updated'></div><div id='scrollDown'>Scroll Lock: true</div></div>
-</body>
+if($_SESSION['loggedIn']){
+	echo "
+<html>
+	<head>
+		<title>wLeaf - Log</title>
+		".$JS."
+		".$CSS."
+	</head>
+	<body>
+		wLeaf Logs:<br/>
+		<div id='log'>
+			<pre>".$log."</pre>
+		</div>
+		<div>
+			<div id='updated'></div>
+			<div id='scrollDown'>Scroll Lock: true</div>
+		</div>
+	</body>
 </html>";
+} else {
+	echo <<<HTML
+<html>
+	<head>
+		<title>wLeaf - Log</title>
+HTML
+		.$JS.PHP_EOL.$CSS.
+<<<HTML
+	</head>
+	<body>
+		<fieldset>
+			<legend>Login</legend>
+			<form name='login' method="POST" action="/">
+				<dl>
+					<dt>Authnaam
+					<dd><input type="text" name="auth" />
+					<dt>Password
+					<dd><input type="password" name="pass" />
+					<dt>Verzend
+					<dd><input type="submit" value="Log in" />
+				</dl>	
+			</form>
+		</fieldset>
+	</body>
+</html>
+HTML
 
+}
  ?>

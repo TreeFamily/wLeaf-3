@@ -2,7 +2,8 @@
 session_start();
 if(isset($_GET['js'])) {
 	header("content-type: text/javascript");
-	echo <<<JAVASCRIPT
+	if($_SESSION['loggedin']) {
+		echo <<<JAVASCRIPT
 var elem;
 
 var scrollToBottom = true;
@@ -43,13 +44,16 @@ function updateLog(){
 	});
 }
 JAVASCRIPT;
+	}
 
 } elseif(isset($_GET['file'])) {
-	$oldCount = $_SESSION['lineCount'];
-	$file = file("log.html");
-	$_SESSION["lineCount"] = count($file);
-	for($i=$oldCount;$i<=$_SESSION['lineCount'];$i++){
-		echo $file[$i];
+	if($_SESSION['loggedin']){
+		$oldCount = $_SESSION['lineCount'];
+		$file = file("log.html");
+		$_SESSION["lineCount"] = count($file);
+		for($i=$oldCount;$i<=$_SESSION['lineCount'];$i++){
+			echo $file[$i];
+		}
 	}
 } else {
 	header("Content-Type: text/html; charset=UTF-8");
