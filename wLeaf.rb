@@ -11,6 +11,7 @@ require './plugin_joinpart.rb'
 require './plugin_team.rb'
 require './plugin_commands.rb'
 require './plugin_znc.rb'
+require './plugin_webIface.rb'
 
 require "./team.rb"
 @team = Team.new
@@ -35,7 +36,8 @@ bot = Cinch::Bot.new do
 	JoinPart,
 	Teamleden,
 	Commands,
-	Znc
+	Znc,
+	WebIface
 	]
   end
 end
