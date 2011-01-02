@@ -17,7 +17,8 @@ class Commands
 			  "join","part","quit",
 			  "myaccess","access", "addhelper","addadmin","suspend","unsuspend",
 			  "adduser",
-			  "commands"
+			  "commands",
+			  "createwebpass"
 			  ]
   end
   
