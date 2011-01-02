@@ -10,15 +10,20 @@ Requirements
 ------------
 **RubyGems**
 
-**cinch (IRC bot framework)**
+**Cinch (IRC bot framework)**
+
 	gem install cinch
-**mysql-ruby**
+**Mysql-ruby**
+
 	gem install mysql
+**[Ansifilter](http://www.andre-simon.de/zip/download.html#ansifilter)** *only for the webinterface*
+
 	
 Databases
 ---------
 **Team table**
 
+	mysql> describe team;
 	+-----------+--------------+------+-----+---------+----------------+----------------+
 	| Field     | Type         | Null | Key | Default | Extra          | Comment        |
 	+-----------+--------------+------+-----+---------+----------------+----------------+
@@ -30,6 +35,7 @@ Databases
 
 **users table**
 
+	mysql> describe users;
 	+-----------+--------------+------+-----+---------+----------------+
 	| Field     | Type         | Null | Key | Default | Extra          |
 	+-----------+--------------+------+-----+---------+----------------+
