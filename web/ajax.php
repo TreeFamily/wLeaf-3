@@ -2,7 +2,7 @@
 session_start();
 if(isset($_GET['js'])) {
 	header("content-type: text/javascript");
-	if($_SESSION['loggedin']) {
+	if($_SESSION['loggedIn']) {
 		echo <<<JAVASCRIPT
 var elem;
 
@@ -47,7 +47,7 @@ JAVASCRIPT;
 	}
 
 } elseif(isset($_GET['file'])) {
-	if($_SESSION['loggedin']){
+	if($_SESSION['loggedIn']){
 		$oldCount = $_SESSION['lineCount'];
 		$file = file("log.html");
 		$_SESSION["lineCount"] = count($file);
